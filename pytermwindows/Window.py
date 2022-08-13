@@ -300,7 +300,9 @@ class Window:
         width : int
             The new width of the window (in numbers of characters per line).
         """
-        self.window.resize( height, width )
+        curses.resizeterm( height, width )
+        # self.window.resize( height, width )
+        self.window.clear()
         self._upack_size()
         self.window.refresh()
 
@@ -324,7 +326,12 @@ class Window:
         color : str
             The color to use.
         """
-        return ( text, self.colors[ color ] )
+        col = self.colors.get( color, None )
+        if col:
+            return ( text, col )
+        else:
+            raise ValueError( f"Color {color} not found. Use one of these colors: { list( self.colors.keys() ) }." )
+        
 
     @staticmethod
     def key_to_int( key ) -> int:
@@ -407,7 +414,6 @@ class Window:
         """
         return self._is_ab_iterable( pos, string )
 
-    
     def update_counter( self ):
         """
         Increment the counter value.
@@ -481,9 +487,31 @@ class Window:
         return self._lines
 
     @property
+    def bottom_line( self ) -> int:
+        """
+        Get the bottom line of the window.
+        """
+        return self.height - 1
+    
+    @property
     def to_bottom_line( self ) -> int:
         """
         Go to the bottom line of the window.
+        """
+        self._lines = self.bottom_line
+        return self._lines
+
+    @property
+    def last_line( self ) -> int:
+        """
+        Get the down-most line that was written to.
+        """
+        return self._max_lines
+
+    @property
+    def to_last_line( self ) -> int:
+        """
+        Go to the down-most line that was written to.
         """
         self._lines = self._max_lines
         return self._lines
@@ -540,14 +568,21 @@ class Window:
         if self._use_color:
             curses.start_color()
             curses.use_default_colors()
+            curses.init_pair( 1, curses.COLOR_WHITE, -1 )
+            curses.init_pair( 2, curses.COLOR_BLACK, -1 )
+            curses.init_pair( 3, curses.COLOR_RED, -1 )
+            curses.init_pair( 4, curses.COLOR_GREEN, -1 )
+            curses.init_pair( 5, curses.COLOR_BLUE, -1 )
+            curses.init_pair( 6, curses.COLOR_YELLOW, -1 )
+            curses.init_pair( 7, curses.COLOR_CYAN, -1 )
             self.colors = {
-                    "white" : curses.init_pair( 1, curses.COLOR_WHITE, -1 ),
-                    "black" : curses.init_pair( 2, curses.COLOR_BLACK, -1 ),
-                    "red"   : curses.init_pair( 3, curses.COLOR_RED, -1 ),
-                    "green" : curses.init_pair( 4, curses.COLOR_GREEN, -1 ),
-                    "blue"  : curses.init_pair( 5, curses.COLOR_BLUE, -1 ),
-                    "yellow": curses.init_pair( 6, curses.COLOR_YELLOW, -1 ),
-                    "cyan"  : curses.init_pair( 7, curses.COLOR_CYAN, -1 ),
+                    "white" : curses.color_pair( 1 ),
+                    "black" : curses.color_pair( 2 ),
+                    "red"   : curses.color_pair( 3 ),
+                    "green" : curses.color_pair( 4 ),
+                    "blue"  : curses.color_pair( 5 ),
+                    "yellow": curses.color_pair( 6 ),
+                    "cyan"  : curses.color_pair( 7 ),
                 }
 
         curses.noecho()
