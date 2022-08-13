@@ -1,5 +1,5 @@
 # PyTermWindows
-
+[![PyPI version](https://badge.fury.io/py/pytermwindows.svg)](https://badge.fury.io/py/pytermwindows)
 [![Documentation Status](https://readthedocs.org/projects/pytermwindows/badge/?version=latest)](https://pytermwindows.readthedocs.io/en/latest/?badge=latest)
 [![CodeFactor](https://www.codefactor.io/repository/github/noahhenrikkleinschmidt/pytermwindows/badge)](https://www.codefactor.io/repository/github/noahhenrikkleinschmidt/pytermwindows)
 
@@ -7,6 +7,13 @@
 This is `PyTermWindows` a `curses`-based package defining the basic `Window` and `ScrollWindow` classes to display data through a terminal window. The classes are proxies for an `curses.stdscr` (called _window_) and allow easy setup, and access to key properties. Also, through atrributes such as `next_line` or `first_line` they allow readable and dynamic content addition. 
 
 The code of the `ScrollWindow` class was especially inspired by [mingrammer's great scroll window example](https://github.com/mingrammer/python-curses-scroll-example). If you are interested in learning more about scrolling terminal windows, check it out!
+
+Installation
+------------
+
+```
+pip install pytermwindows
+```
 
 Examples
 --------
