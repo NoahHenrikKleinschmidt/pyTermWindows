@@ -32,7 +32,7 @@ class ScrollWindow( Window ):
         bottom : int
             The number of lines to print after the top line.
         """
-        self.bottom = bottom - 1
+        self.bottom = bottom
 
     def _init( self ):
         super()._init()
@@ -76,14 +76,21 @@ class ScrollWindow( Window ):
         self.write( self.to_next_line, 0, "This is a ScrollWindow"  )
         self.write( self.to_next_line, 0, "-" * 50 )
 
-        _data = [ str(i) + "\ttest" * 5 for i in range( 200 ) ]
+        maxval = 200
+        _data = [ str(i) + "\ttest" * 5 for i in range( maxval ) ]
+        self.resize( len(_data) + 5, 200 )
 
         self.auto_scroll( restrict = len(_data) )
        
         data = _data[ self.scroll_range( as_slice = True ) ]
-        for line in data:
+        for idx, line in enumerate(data):
             self.write( self.to_next_line, 0, line )
-      
+
+        
+        self.write( self.to_next_line, 0, "-" * 50 )
+        self.write( self.to_next_line, 0, "End of ScrollWindow" )
+        self.write( self.to_next_line, 0, "-" * 50 )
+
         self.quit_on( keystring = "q" )
         self.refresh()
 
@@ -178,10 +185,10 @@ class ScrollWindow( Window ):
         """
         Get the bottom index of the scroll window.
         """
-        return min( self.top + self.bottom + 1, self.height )         
+        return min( self.top + self.bottom, self.height )         
 
 if __name__ == '__main__':
 
-    win = ScrollWindow( height = 1000, width = 50 )
+    win = ScrollWindow( height = 100, width = 50 )
     win.set_scroll_range( 10 )
     win.run()
