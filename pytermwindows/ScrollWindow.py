@@ -94,6 +94,12 @@ class ScrollWindow( Window ):
         self.quit_on( keystring = "q" )
         self.refresh()
 
+    def crop_data_to_scroll_range( self, data ):
+        """
+        Return a subset of the data to display in the scroll window.
+        """
+        return data[ self.top : self._bottom_index() ]
+
     def set_scroll_keys( self, up_key : int, down_key : int ):
         """
         Set the keys to scroll the window.
