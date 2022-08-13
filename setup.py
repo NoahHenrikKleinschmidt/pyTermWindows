@@ -5,10 +5,10 @@ with open( "README.md", "r" ) as fh:
 
 setuptools.setup(
     name="pytermwindows", 
-    version="0.0.4",
+    version="1.0.0",
     author="Noah H. Kleinschmidt",
     author_email="noah.kleinschmidt@students.unibe.ch",
-    description="A terminal window library for Python",
+    description="A package to generate responsive terminal windows in Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/NoahHenrikKleinschmidt/PyTermWindows",
