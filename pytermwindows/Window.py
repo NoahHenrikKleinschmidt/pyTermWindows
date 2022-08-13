@@ -338,7 +338,7 @@ class Window:
         else:
             raise ValueError( f"Color {color} not found. Use one of these colors: { list( self.colors.keys() ) }." )
     
-    def clear_line( self, line : int ):
+    def clear_line( self, line : int or Iterable ):
         """
         Clear a line.
 
@@ -348,13 +348,21 @@ class Window:
 
         Parameters
         ----------
-        line : int
-            The line to clear. 
+        line : int or Iterable
+            The line(s) to clear. 
         """
-        current = self._lines
-        self.window.move( line, 0 )
-        self.window.clrtoeol()
-        self._lines = current
+        # current = self._lines
+
+        if isinstance( line, int):
+            self.window.move( line, 0 )
+            self.window.clrtoeol()
+
+        elif isinstance( line, Iterable ):
+            for l in line:
+                self.window.move( l, 0 )
+                self.window.clrtoeol()
+                
+        # self._lines = current
 
     @staticmethod
     def key_to_int( key ) -> int:
