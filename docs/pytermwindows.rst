@@ -7,16 +7,16 @@ pytermwindows package
    :show-inheritance:
 
 
-pytermwindows.Window module
----------------------------
+pytermwindows.Window class
+--------------------------
 
 .. automodule:: pytermwindows.Window
    :members:
    :undoc-members:
    :show-inheritance:
 
-pytermwindows.ScrollWindow module
----------------------------------
+pytermwindows.ScrollWindow class
+--------------------------------
 
 .. automodule:: pytermwindows.ScrollWindow
    :members:

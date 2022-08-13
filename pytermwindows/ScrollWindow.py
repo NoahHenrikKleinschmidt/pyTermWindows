@@ -3,9 +3,52 @@ from Window import Window
 
 class ScrollWindow( Window ):
     """
-    A window to handle writing data to the terminal using the `curses` library.
-    This window is specifically designed to write content that is too long to be shown in full
+    A window to handle writing data to the terminal using the `curses` library. This window is specifically designed to write content that is too long to be shown in full
     and instead should be presented scrollably.
+
+    Attributes
+    ----------
+    window : curses.window
+        The main curses window object.
+    width : int
+        The width of the window in characters per line.
+    height : int
+        The height of the window as maximal number of lines.
+    children : dict
+        A dictionary of sub-windows and panes that may be stored inside the main window.
+        These can be added to using `add_child`, and accessed directly or via `get_child`.
+    name : str
+        The name of this window.
+    parent : Window
+        The parent window of this window. This will be automatically set in case a window is added via `add_child`.
+
+    Setting Updates
+    
+        set_update_interval
+            Set the update interval. The Window supports a second time interval (measured in seconds rather than milliseconds)
+            in which periodic updates may be performed such as reading external data files to update the window content, while
+            allowing the window itself to render at a much faster rate.
+        can_update
+            Check if the window can update. If the update interval has been reached, this will return 
+            `True` and reset the internal update counter.
+        update_counter
+            Increment the update counter. This should be called each time the window is refreshed.
+
+
+    Parameters
+    ----------
+    width : int
+        Width of the window in characters per line.
+    height : int
+        Height of the window as maximal number of lines.
+    start_line : int
+        Start line of the window.
+    refresh : int
+        Refresh rate of the window in milliseconds.
+    waitkey : int
+        Wait time between each refresh in milliseconds.
+    use_color : bool
+        Use colors if available. This will slow down the rendering a bit...
     """
 
     up = -1

@@ -23,17 +23,17 @@ class Window:
     parent : Window
         The parent window of this window. This will be automatically set in case a window is added via `add_child`.
 
-    Updates
-    -------
-    set_update_interval
-        Set the update interval. The Window supports a second time interval (measured in seconds rather than milliseconds)
-        in which periodic updates may be performed such as reading external data files to update the window content, while
-        allowing the window itself to render at a much faster rate.
-    can_update
-        Check if the window can update. If the update interval has been reached, this will return 
-        `True` and reset the internal update counter.
-    update_counter
-        Increment the update counter. This should be called each time the window is refreshed.
+    Setting Updates
+    
+        set_update_interval
+            Set the update interval. The Window supports a second time interval (measured in seconds rather than milliseconds)
+            in which periodic updates may be performed such as reading external data files to update the window content, while
+            allowing the window itself to render at a much faster rate.
+        can_update
+            Check if the window can update. If the update interval has been reached, this will return 
+            `True` and reset the internal update counter.
+        update_counter
+            Increment the update counter. This should be called each time the window is refreshed.
 
 
     Parameters

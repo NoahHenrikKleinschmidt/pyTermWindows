@@ -6,14 +6,17 @@
 Welcome to PyTermWindows's documentation!
 =========================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
 .. automodule:: pytermwindows
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   pytermwindows.Window
+   pytermwindows.ScrollWindow
 
 Indices and tables
 ==================
