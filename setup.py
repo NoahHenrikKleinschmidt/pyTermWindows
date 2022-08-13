@@ -5,7 +5,7 @@ with open( "README.md", "r" ) as fh:
 
 setuptools.setup(
     name="pytermwindows", 
-    version="1.0.0",
+    version="0.0.5",
     author="Noah H. Kleinschmidt",
     author_email="noah.kleinschmidt@students.unibe.ch",
     description="A package to generate responsive terminal windows in Python",
