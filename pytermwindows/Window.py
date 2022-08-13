@@ -555,7 +555,7 @@ class Window:
         self.window.clear()
         self.window.refresh()
 
-        if self.width:
+        if self.height and self.width:
             self.resize( self.height, self.width )
         else:
             self.adjust_size()

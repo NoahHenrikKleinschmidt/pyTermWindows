@@ -52,15 +52,24 @@ class MyWindow( Window ):
 
 
 # and now run our window
-mywindow = MyWindow()
+mywindow = MyWindow( height = 10, width = 50 )
 mywindow.run()
+```
+
+The resulting window looks like this:
+
+```
+This is my great window
+--------------------------------------------------
+You pressed 'g'...
+
 ```
 
 A more complex example of a ScrollWindow: Let's say we have a data file we wish to read from every few seconds and display the lines in a ScrollWindow. To make that easier, the `Window` class (and by inheritance also the ScrollWindow) offers a `set_update_interval` method that will control an external timer to allow method calling outside of the window-frame updating timescale.
 
 ```python
 
-class ViewMyLogs( ScrollWindow ):
+class MyScroller( ScrollWindow ):
         """
         This class shall read my log file and display the lines.
 
@@ -96,7 +105,7 @@ class ViewMyLogs( ScrollWindow ):
             """
 
             # write a nice header again
-            self.write( self.to_first_line, 0, f"Logfile: {self.file}" )
+            self.write( self.to_first_line, 0, f"File: {self.file}" )
             self.write( self.to_next_line, 0, "-" * 50 )
 
             # now read the file the first time (None), or whenever 
@@ -127,15 +136,27 @@ class ViewMyLogs( ScrollWindow ):
 
 
 # now we can use our window as:
-mylogviewer = ViewMyLogs( "my_logs.log" )
+myscroller = MyScroller( "my_file.txt", height = 20, width = 100 )
 
 # setup the update interval as (approx) every 10 seconds
 # hence, our log file contents will be updated every 10 seconds
-mylogviewer.set_update_interval( 10 )
+myscroller.set_update_interval( 10 )
 
 # and set the scroll range (i.e. how many data lines to display)
 # let's say 5 lines at a time.
-mylogviewer.set_scroll_range( 5 )
+myscroller.set_scroll_range( 5 )
 
-mylogviewer.run()
+myscroller.run()
+```
+
+The resulting window looks like this:
+
+```
+File: ~/GIT/pyTermWindows/my_file.txt
+--------------------------------------------------
+8888757      pall smk-roh- lzeitler PD       0:00      1 (AssocMaxJobsLimit)
+8888758      pall smk-roh- lzeitler PD       0:00      1 (AssocMaxJobsLimit)
+8888734      pall smk-sim- lzeitler PD       0:00      1 (AssocMaxJobsLimit)
+8888735      pall smk-sim- lzeitler PD       0:00      1 (AssocMaxJobsLimit)
+8888736      pall smk-sim- lzeitler PD       0:00      1 (AssocMaxJobsLimit)
 ```
