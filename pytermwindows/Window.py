@@ -337,7 +337,24 @@ class Window:
             return ( text, col )
         else:
             raise ValueError( f"Color {color} not found. Use one of these colors: { list( self.colors.keys() ) }." )
-        
+    
+    def clear_line( self, line : int ):
+        """
+        Clear a line.
+
+        Note
+        ----
+        This will not refresh the window. And not affect the positioning of the current_line.
+
+        Parameters
+        ----------
+        line : int
+            The line to clear. 
+        """
+        current = self._lines
+        self.window.move( line, 0 )
+        self.window.clrtoeol()
+        self._lines = current
 
     @staticmethod
     def key_to_int( key ) -> int:
