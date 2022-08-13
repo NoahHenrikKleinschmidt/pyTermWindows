@@ -160,6 +160,7 @@ class Window:
             while True:
             
                 self.contents(**kwargs)
+                self.auto_adjust_size()
 
         except KeyboardInterrupt:
             print( "Exiting..." )
