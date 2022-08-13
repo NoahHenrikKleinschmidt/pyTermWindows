@@ -363,7 +363,7 @@ class Window:
         Set the current line.
         """
         self._lines = line
-        self.window.move( line, 0 )
+        # self.window.move( line, 0 )
     
     def is_linewise_iterable( self, line, string ) -> bool:
         """
@@ -582,8 +582,12 @@ class Window:
         """
         if self.height is None or self._lines + value < self.height:
             self._lines += value
+
         if self._lines > self._max_lines:
             self._max_lines = self._lines
+
+        if self._lines + value < self._first_line: 
+            self._lines = self._first_line
 
     def _upack_size( self ):
         """
