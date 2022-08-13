@@ -3,7 +3,7 @@ from Window import Window
 
 class ScrollWindow( Window ):
     """
-    A window to handle writing python data to the terminal using the `curses` library.
+    A window to handle writing data to the terminal using the `curses` library.
     This window is specifically designed to write content that is too long to be shown in full
     and instead should be presented scrollably.
     """
