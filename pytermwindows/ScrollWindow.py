@@ -54,8 +54,8 @@ class ScrollWindow( Window ):
     up = -1
     down = 1
 
-    def __init__( self, name : str = None, width : int = None, height : int = None, start_line = 0, refresh : int = 50, waitkey : int = 50 ):
-        super().__init__( name, width, height, start_line, refresh, waitkey )
+    def __init__( self, name : str = None, width : int = None, height : int = None, start_line = 0, refresh : int = 50, waitkey : int = 50, use_color : bool = False ):
+        super().__init__( name, width, height, start_line, refresh, waitkey, use_color )
         
         # initialize data indices for an 
         # iterable to print to the scroll window
