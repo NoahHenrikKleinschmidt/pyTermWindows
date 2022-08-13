@@ -32,7 +32,7 @@ class ScrollWindow( Window ):
         bottom : int
             The number of lines to print after the top line.
         """
-        self.bottom = bottom
+        self.bottom = bottom - 1
 
     def _init( self ):
         super()._init()
