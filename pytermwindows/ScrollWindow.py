@@ -1,5 +1,5 @@
 import curses
-from Window import Window
+from pytermwindows.Window import Window
 
 class ScrollWindow( Window ):
     """
@@ -234,7 +234,7 @@ class ScrollWindow( Window ):
         """
         Get the bottom index of the scroll window.
         """
-        return min( self.top + self.bottom, self.height )         
+        return self.top + self.bottom #min( self.top + self.bottom, self.height )         
 
 if __name__ == '__main__':
 
