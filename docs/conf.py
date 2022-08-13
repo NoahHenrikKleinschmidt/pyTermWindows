@@ -31,14 +31,15 @@ release = '0.0.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'autoapi.extension',
+    # 'autoapi.extension',
+    'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
-autoapi_dirs = ['../pytermwindows']
+# autoapi_dirs = ['../pytermwindows']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
