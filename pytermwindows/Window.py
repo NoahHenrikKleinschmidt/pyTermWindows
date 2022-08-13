@@ -240,7 +240,7 @@ class Window:
         """
         return self.children.get( name, None )
 
-    def write( self, line : int, pos : int, string : str, refresh : bool = False ):
+    def write( self, line : int, pos : int, string : str, refresh : bool = False, clear : bool = False ):
         """
         Write a string to the window.
 
@@ -254,10 +254,12 @@ class Window:
             The string to write.
         refresh : bool
             Whether to refresh the window after writing.
+        clear : bool
+            Whether to clear the line before writing.
         """
-        self.write_to( self.window, line, pos, string, refresh )
+        self.write_to( self.window, line, pos, string, refresh, clear )
     
-    def write_to( self, window_or_pane, line : int, pos : int, string : str, refresh : bool = False ):
+    def write_to( self, window_or_pane, line : int, pos : int, string : str, refresh : bool = False, clear : bool = False ):
         """
         Write a string to a specific (sub)window or pane.
 
@@ -273,16 +275,31 @@ class Window:
             The string to write.
         refresh : bool
             Whether to refresh the window after writing.
+        clear : bool
+            Whether to clear the line before writing.
         """
+
         if self.is_linewise_iterable( line, string ):
             for l,s in zip( line, string ):
+                if clear: 
+                    window_or_pane.move( l, 0 )
+                    window_or_pane.clrtoeol()
+
                 self._write_to( window_or_pane, l, pos, s, refresh )
                 self._modify_line( self.line_diff( l ) )
 
         elif self.is_columwise_iterable( pos, string ):
+            if clear: 
+                window_or_pane.move( line, 0 )
+                window_or_pane.clrtoeol()
+                
             for p,s in zip( pos, string ):
                 self._write_to( window_or_pane, line, p, s, refresh )
+
         else:
+            if clear:
+                window_or_pane.move( line, 0 )
+                window_or_pane.clrtoeol()
             self._write_to( window_or_pane, line, pos, string, refresh )
 
     def auto_adjust_size( self ):
