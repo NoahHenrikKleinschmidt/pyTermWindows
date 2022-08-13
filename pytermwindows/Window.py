@@ -495,6 +495,13 @@ class Window:
         """
         return self._lines
 
+    @current_line.setter
+    def current_line( self, line ):
+        """
+        Set the current line.
+        """
+        self.set_line( line )
+
     @property
     def next_line( self ) -> int:
         """
