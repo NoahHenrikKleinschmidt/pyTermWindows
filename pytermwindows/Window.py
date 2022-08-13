@@ -1,6 +1,8 @@
 import curses
 from collections.abc import Iterable
+import logging
 
+logger = logging.getLogger("pytermwindows")
 
 class Window:
     """
@@ -327,6 +329,9 @@ class Window:
         color : str
             The color to use.
         """
+        if not self._use_color:
+            logger.warning( "Color is not enabled." )
+            return text
         col = self.colors.get( color, None )
         if col:
             return ( text, col )
