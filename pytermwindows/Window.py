@@ -166,6 +166,9 @@ class Window:
 
         except KeyboardInterrupt:
             print( "Exiting..." )
+            
+        except Exception as e:
+            logger.exception( e )
 
         finally:
             self._destroy()
