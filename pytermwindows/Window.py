@@ -159,16 +159,14 @@ class Window:
 
             self._init()
             
-            while True:
-            
-                self.contents(**kwargs)
-                self.auto_adjust_size()
+            self._mainloop(kwargs)
 
         except KeyboardInterrupt:
             print( "Exiting..." )
             
         except Exception as e:
             logger.exception( e )
+            self._mainloop(kwargs)
 
         finally:
             self._destroy()
@@ -611,6 +609,14 @@ class Window:
         """
         return self._lines - 1
     
+    def _mainloop(self, kwargs):
+        """
+        The main loop of the window.
+        """
+        while True:
+            self.contents(**kwargs)
+            self.auto_adjust_size()
+
     def _init( self ):
         """
         Initialize curses
